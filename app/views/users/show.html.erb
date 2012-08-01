@@ -14,6 +14,9 @@
           <td class="span5"><%= link_to full_url , full_url %></td>
           <td class="span5">--></td>
           <td class="span5"><%= link.original_url %></td>
+          <td class="span5">
+            <%= link_to "Delete", link, method: 'delete', data: {confirm: 'Are you Sure?'} %>
+          </td>
         </tr>
       </div>
     <% end %> 

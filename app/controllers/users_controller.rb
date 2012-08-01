@@ -18,4 +18,6 @@ class UsersController < ApplicationController
     @links = @user.links.all
     @base_url = root_url
   end
+  
+  
 end

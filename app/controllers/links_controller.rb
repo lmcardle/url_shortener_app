@@ -9,18 +9,20 @@ class LinksController < ApplicationController
   end
   
   def create
-    default_hostname = "localhost:3000/"
-    random_string = (0...8).map{65.+(rand(25)).chr}.join
-    short_url = default_hostname + random_string
     
-    @link = Link.new(:original_url => params[:link][:original_url], :short_url => random_string, 
-                      :user_id => params[:link][:user_id])
+    @link = Link.new(:original_url => params[:link][:original_url],
+                     :short_url => params[:link][:short_url], 
+                     :user_id => params[:link][:user_id])
     if @link.save
       redirect_to @link
+    else
+      flash[:error] = "You have an issue with your definded Short URL"
+      render 'new'
     end
   end
   
   def show
+    @base_url = root_url
     @link = Link.find(params[:id])
   end  
   
@@ -28,5 +30,10 @@ class LinksController < ApplicationController
     @link = Link.find_by_short_url!(params[:short_url])
     redirect_to @link.original_url
   end
-    
+  
+  def destroy
+    user = Link.find(params[:id]).user_id
+    Link.find(params[:id]).destroy
+    redirect_to user_path(user)
+  end  
 end
