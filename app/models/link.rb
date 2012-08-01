@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-  attr_accessible :original_url, :short_url
+  attr_accessible :original_url, :short_url, :user_id
   belongs_to :user
   
   before_save :clean_up_url
