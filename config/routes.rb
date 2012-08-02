@@ -5,16 +5,13 @@ UrlShortenerApp::Application.routes.draw do
     match 'sign_out' => 'devise/sessions#destroy'
   end
   
-  match 'vanity'  => 'links#vanity_url'
-  
   devise_for :users
+  
   resources :users
   resources :links
-
-  get "links/new"
   
   root to: "links#new"
 
 
-  match ':short_url' => 'links#goto'
+  match ':short_url' => 'link_redirects#show'
 end
