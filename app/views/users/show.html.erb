@@ -1,22 +1,28 @@
 <h1><%= @user.name %></h1>
+<p><%= link_to "Sign Out", sign_out_path %>
+
+<p><%= link_to "Create a New URL", new_link_path %></p>
 
 <div class="row">
   <table>
     <tr>
-      <th class="span5">Short URL</th>
-      <th class="span2">Points to</th>
-      <th class="span5">Original URL</th>
+      <th class="span4">Short URL</th>
+      <th class="span1">Points to</th>
+      <th class="span4">Original URL</th>
+      <th class="span1">Delete</th>
+      <th class="span1">Show</th>
     </tr>
     <% @links.each do |link| %>
       <div class="row"
         <tr>
           <% full_url = @base_url + link.short_url %>
-          <td class="span5"><%= link_to full_url , full_url %></td>
-          <td class="span5">--></td>
-          <td class="span5"><%= link.original_url %></td>
-          <td class="span5">
+          <td class="span4"><%= link_to full_url , full_url %></td>
+          <td class="span1">--></td>
+          <td class="span4"><%= link.original_url %></td>
+          <td class="span1">
             <%= link_to "Delete", link, method: 'delete', data: {confirm: 'Are you Sure?'} %>
           </td>
+          <td class="span1"><%= link_to "Stats", link_path(link) %></td>
         </tr>
       </div>
     <% end %> 

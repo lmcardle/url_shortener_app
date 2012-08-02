@@ -6,9 +6,16 @@
   <%= f.label :short_url %>
   <%= f.text_field :short_url %>
   
-  <%= f.label :user_id %>
-  <%= f.text_field :user_id %>
+  <%#= f.label :user_id %>
+  <%#= f.text_field :user_id %>
 
   <%= f.submit "Create Short URL" %>
   
+<% end %>
+
+<% if user_signed_in? %>
+  <p><%= link_to "My Short URLs", user_path(current_user) %></p>
+  <p><%= link_to "Sign Out", destroy_user_session_path, :method => 'delete' %></p>
+<% else %>
+  <p><%= link_to "Sign In", new_user_session_path %></p>
 <% end %>

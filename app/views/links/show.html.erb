@@ -1,6 +1,17 @@
 <h1> Standard URL Shortener</h1>
-<%= @link.original_url %>
+<% full_url = root_url + @link.short_url %>
+<p><%= full_url %></p>
+
 <p>goes to:</p>
 
-<% full_url = root_url + @link.short_url %>
-<%= full_url %>
+<p><%= @link.original_url %></p>
+
+<br />
+<h1>Short URL Stats:</h1>
+<p>This short URL has had <%= @link.hits.count %> hits</p>
+<p>The vistits are from these IP Addresses:</p>
+<% @link.hits.each do |hit| %>
+  <p><%= hit.ip_address %> from country: <%= country_finder(hit.ip_address) %></p>
+  
+<% end %>
+

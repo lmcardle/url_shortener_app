@@ -1,5 +1,4 @@
-class LinksController < ApplicationController
-  
+class LinksController < ApplicationController  
   def index
     @links = Link.all
   end
@@ -12,9 +11,9 @@ class LinksController < ApplicationController
     
     @link = Link.new(:original_url => params[:link][:original_url],
                      :short_url => params[:link][:short_url], 
-                     :user_id => params[:link][:user_id])
+                     :user_id => current_user.id)
     if @link.save
-      redirect_to @link
+      redirect_to user_path(current_user)
     else
       flash[:error] = "You have an issue with your definded Short URL"
       render 'new'
@@ -28,6 +27,9 @@ class LinksController < ApplicationController
   
   def goto
     @link = Link.find_by_short_url!(params[:short_url])
+    remote_ip = request.remote_ip
+    Hit.create(:link_id => @link.id, :ip_address => remote_ip)
+    
     redirect_to @link.original_url
   end
   

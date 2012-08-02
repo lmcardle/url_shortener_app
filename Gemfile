@@ -2,6 +2,12 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.7'
 gem 'bootstrap-sass'
+gem 'geoip'
+gem 'json'
+gem 'rest-client'
+gem 'devise'
+
+gem 'annotate', '2.5.0', group: :development
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

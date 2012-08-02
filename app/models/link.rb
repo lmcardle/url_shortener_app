@@ -1,6 +1,19 @@
+# == Schema Information
+#
+# Table name: links
+#
+#  id           :integer          not null, primary key
+#  original_url :string(255)
+#  short_url    :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :integer
+#
+
 class Link < ActiveRecord::Base
   attr_accessible :original_url, :short_url, :user_id
   belongs_to :user
+  has_many :hits
   
   before_save { self.short_url.downcase! }
   before_save :undesirable_words
